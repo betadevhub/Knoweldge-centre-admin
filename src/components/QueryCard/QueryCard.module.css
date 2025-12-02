@@ -1,0 +1,39 @@
+.container {
+    padding: calc(10 / 1440 * 100vw) calc(18 / 1440 * 100vw);
+    display: flex;
+    align-items: center;
+}
+
+.totalCountCard {
+    display: flex;
+    align-items: center;
+    gap: calc(10 / 1440 * 100vw);
+    font-weight: bold;
+}
+
+.totalCountNumber {
+    font-weight: normal;
+    font-size: calc(14 / 1440 * 100vw);
+    color: var(--description);
+}
+
+.select {
+    width: 100%;
+    height: 100%;
+    font-size: calc(11 / 1440 * 100vw);
+    color: var(--description);
+}
+
+.rightGroup {
+    margin-left: auto;
+    gap: calc(30 / 1440 * 100vw);
+    display: flex;
+    align-items: center;
+}
+
+.dateCardGroup{
+    display: flex;
+    align-items: center;
+    gap: calc(5 / 1440 * 100vw);
+    color: var(--description);
+}

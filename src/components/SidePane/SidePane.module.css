@@ -1,0 +1,88 @@
+.container {
+    background: var(--background);
+    width: calc(215 / 1440 * 100vw);
+    padding: calc(28 / 1440 * 100vw) calc(13 / 1440 * 100vw);
+    padding-bottom: calc(5 / 1440 * 100vw);
+    height: 100vh;
+    color: var(--paneColor);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    width: calc(99 / 1440 * 100vw);
+    margin-bottom: calc(28 / 1440 * 100vw);
+}
+
+.menuCard {
+    padding: calc(10 / 1440 * 100vw);
+    display: flex;
+    align-items: center;
+    gap: calc(7 / 1440 * 100vw);
+    border-radius: calc(5 / 1440 * 100vw);
+    transition: var(--allTransition);
+    cursor: pointer;
+}
+
+.menuCard:hover {
+    text-decoration: line-through;
+}
+
+.menuCardActive {
+    background: var(--paneHover);
+}
+
+.menuCardList {
+    display: flex;
+    flex-direction: column;
+    gap: calc(5 / 1440 * 100vw);
+    font-size: calc(12 / 1440 * 100vw);
+}
+
+.listNameContainer {
+    padding: calc(10 / 1440 * 100vw);
+    margin-bottom: calc(2 / 1440 * 100vw);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.line1 {
+    margin: calc(15 / 1440 * 100vw) 0;
+    width: 100%;
+    height: calc(0.5 / 1440 * 100vw);
+    background-color: rgba(181, 199, 203, 0.65);
+}
+
+.paneIconBackground {
+    width: calc(25 / 1440 * 100vw);
+    height: calc(25 / 1440 * 100vw);
+    border-radius: calc(5 / 1440 * 100vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--allTransition);
+    cursor: pointer;
+}
+
+.paneIconBackground:hover {
+    background: var(--paneHover);
+}
+
+.seeAll {
+    transition: var(--allTransition);
+    cursor: pointer;
+    padding: calc(5 / 1440 * 100vw) calc(10 / 1440 * 100vw);
+}
+
+.seeAll:hover {
+    text-decoration: underline;
+}
+
+
+.line2 {
+    margin-top: auto;
+}

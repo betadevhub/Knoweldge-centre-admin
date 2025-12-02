@@ -1,0 +1,45 @@
+.checkBoxContainer {
+    width: calc(16 / 1440 * 100vw);
+    height: calc(16 / 1440 * 100vw);
+    margin-right: calc(38 / 1440 * 100vw);
+    border-radius: calc(5 / 1440 * 100vw);
+    border: solid calc(1 / 1440 * 100vw) #d6d5da;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 / 1440 * 100vw);
+    width: 100%;
+}
+
+.input {
+    height: calc(44 / 1440 * 100vw);
+    padding: calc(14 / 1440 * 100vw) calc(17 / 1440 * 100vw);
+    border-radius: calc(4 / 1440 * 100vw);
+    border: solid calc(1 / 1440 * 100vw) #e5e5e5;
+    background-color: #fafafa;
+    width: 100%;
+}
+
+.smallInput {
+    flex: 1;
+}
+
+.label {
+    font-size: calc(14 / 1440 * 100vw);
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.togglePasswordIcon {
+    font-size: calc(10 / 1440 * 100vw);
+    color: var(--blue);
+    cursor: pointer;
+}
+
+.togglePasswordIcon:hover {
+    opacity: var(--opacity);
+}

@@ -1,0 +1,29 @@
+
+.container{
+    width: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconContainer{
+    width: calc(25 / 1440 * 100vw);
+    height: calc(25 / 1440 * 100vw);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--allTransition);
+}
+
+.icon{
+    transform: rotate(90deg);
+    font-size: calc(12 / 1440 * 100vw);
+}
+
+.iconContainer:hover{
+    background: var(--lightOutline);
+}

@@ -1,0 +1,16 @@
+.authText {
+    font-size: calc(14 / 1440 * 100vw);
+    margin-top: calc(43 / 1440 * 100vw);
+    line-height: calc((1.43 * 14) / 1440 * 100vw);
+    color: var(--description);
+}
+
+.ctaText{
+    color: var(--blue);
+    cursor: pointer;
+    transition: var(--allTransition);
+}
+
+.ctaText:hover{
+    opacity: var(--opacity);
+}

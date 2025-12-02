@@ -1,0 +1,79 @@
+.container {
+    padding: calc(30 / 1440 * 100vw) calc(66 / 1440 * 100vw);
+    background: #f9f9f7;
+    height: 100vh;
+    width: calc(100vw - calc(215 / 1440 * 100vw));
+}
+
+.queryCard {
+    min-width: calc(124 / 1440 * 100vw);
+    height: calc(28 / 1440 * 100vw);
+    padding: 0 calc(10 / 1440 * 100vw);
+    font-size: calc(11 / 1440 * 100vw);
+    border-radius: calc(5 / 1440 * 100vw);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: solid calc(1 / 1440 * 100vw) var(--lightOutline);
+    background-color: #f9f9f7;
+    position: relative;
+    z-index: 2;
+}
+
+.tableHead{
+    background: var(--background);
+    padding: calc(10 / 1440 * 100vw) calc(18 / 1440 * 100vw);
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: calc(10 / 1440 * 100vw);
+    width: 100%;
+}
+
+.tableBody{
+    background: #f9f9f7;
+    color: var(--description);
+    font-size: calc(12 / 1440 * 100vw);
+}
+
+.authWrapper{
+    background: url('/src/assets/Frame\ 273.svg');
+    height: 100vh;
+    width: 100vw;
+}
+
+.cardWrapper{
+    width: calc(408 / 1440 * 100vw);
+    padding: calc(20 / 1440 * 100vw);
+    background: #fff;
+    color: var(--color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.standalonelogo{
+    width: calc(69 / 1440 * 100vw);
+    margin-bottom: calc(13 / 1440 * 100vw);
+}
+
+.cardWrapperTitle{
+    font-size: calc(24 / 1440 * 100vw);
+    font-weight: bold;
+    margin-bottom: calc(43 / 1440 * 100vw);
+}
+
+.inputListWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: calc(20 / 1440 * 100vw);
+    width: 100%;
+}
+
+.mainWrapper{
+    display: flex;
+    gap: calc(10 / 1440 * 100vw)
+}

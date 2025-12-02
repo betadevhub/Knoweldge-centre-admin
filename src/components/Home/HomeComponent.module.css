@@ -1,0 +1,93 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: calc(7.9 / 1440 * 100vw);
+}
+
+
+.title {
+    font-size: calc(24 / 1440 * 100vw);
+    font-weight: bold;
+    line-height: calc((0.96 * 24) / 1440 * 100vw);
+}
+
+.description {
+    font-size: calc(12.5 / 1440 * 100vw);
+    color: var(--description);
+}
+
+.cardList {
+    display: flex;
+    gap: calc(17 / 1440 * 100vw);
+    margin-top: calc(28 / 1440 * 100vw);
+    margin-bottom: calc(14 / 1440 * 100vw);
+}
+
+.cardContainer {
+    flex: 1;
+    display: flex;
+    gap: calc(10 / 1440 * 100vw);
+    padding: calc(15 / 1440 * 100vw) calc(11 / 1440 * 100vw);
+    border-radius: calc(5 / 1440 * 100vw);
+    border: solid calc(1 / 1440 * 100vw) var(--lightOutline);
+    background-color: #fff;
+    transition: var(--allTransition);
+    cursor: pointer;
+}
+
+.cardIconContainer {
+    width: calc(26 / 1440 * 100vw);
+    height: calc(26 / 1440 * 100vw);
+    border-radius: calc(5 / 1440 * 100vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardContainer:hover {
+    transform: translateY(calc(-10 / 1440 * 100vw));
+    background: var(--paneHover);
+    background: var(--background);
+}
+
+
+.cardIcon {
+    font-size: calc(12 / 1440 * 100vw);
+    color: #fff;
+}
+
+.cardTextContainer {
+    width: calc(100% - calc((26 + 10) / 1440 * 100vw));
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 / 1440 * 100vw);
+}
+
+.cardName {
+    font-size: calc(12.5 / 1440 * 100vw);
+    font-weight: bold;
+    color: #000;
+}
+
+.cardDescription {
+    font-size: calc(11 / 1440 * 100vw);
+    color: var(--description);
+    font-weight: normal;
+}
+
+.cardContainer:hover .cardName {
+    color: #fff;
+}
+
+.cardContainer:hover .cardDescription {
+    color: var(--paneColor);
+}
+
+.tableHeadElement {
+    width: calc(100% - calc((16 + 38) / 1440 * 100vw));
+    padding: calc(10 / 1440 * 100vw) calc(18 / 1440 * 100vw);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: calc(2 / 1440 * 100vw);
+}

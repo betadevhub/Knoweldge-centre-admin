@@ -1,0 +1,19 @@
+.container {
+    background: #fff;
+    border-radius: calc(5 / 1440 * 100vw);
+    overflow: hidden;
+    border: solid calc(1 / 1440 * 100vw) var(--lightOutline);
+}
+
+
+.large {
+    margin-right: auto;
+}
+
+.small {
+    width: 7%;
+}
+
+.xSmall{
+    width: 5%;
+}

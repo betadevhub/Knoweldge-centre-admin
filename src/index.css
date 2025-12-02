@@ -1,0 +1,79 @@
+#root {
+  color: #35485e;
+  background-color: #ffffff;
+  --allTransition: 0.5s all;
+  --opacity: 0.5;
+  --boxShadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  --border: 1px solid #000;
+  --background: #2e2e2e;
+  --paneColor: #b5c7cb;
+  --paneHover: rgba(0, 0, 0, 0.23);
+  --description: #6d6b76;
+  --lightOutline: #e9e9e9;
+  --blue: #4da0ff;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('./fonts/aeonik/AeonikTRIAL-Regular.otf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aeonik';
+  src: url('./fonts/aeonik/AeonikTRIAL-Bold.otf');
+  font-weight: bold;
+}
+
+body {
+  font-family: "Aeonik";
+  font-size: calc(14 / 1440 * 100vw);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button,
+input,
+textarea,
+select {
+  font-size: calc(14 / 1440 * 100vw);
+  font-family: "Aeonik";
+  resize: none;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  font-family: "Aeonik";
+  font-size: calc(12 / 1440 * 100vw);
+  color: #999;
+}
+
+
+
+@media screen and (max-width: 540px) {
+  body {
+    font-size: calc(14 / 414 * 100vw);
+  }
+
+  button,
+  input,
+  select,
+  textarea,
+  input::placeholder,
+  textarea::placeholder,
+  select::placeholder {
+    font-size: calc(14 / 414 * 100vw);
+  }
+}
