@@ -1,0 +1,48 @@
+.todoWrapper {
+    display: flex;
+    gap: calc(12 / 1440 * 100vw);
+    align-items: flex-start;
+}
+
+.checkbox {
+    margin-top: calc(8 / 1440 * 100vw);
+    width: calc(18 / 1440 * 100vw);
+    height: calc(18 / 1440 * 100vw);
+    cursor: pointer;
+    flex-shrink: 0;
+    accent-color: var(--blue);
+}
+
+.checkbox:checked {
+    background-color: var(--blue);
+}
+
+.checkboxLabel {
+    display: none;
+}
+
+.textarea {
+    width: 100%;
+    outline: none;
+    background-color: transparent;
+    resize: none;
+    overflow: hidden;
+    border: none;
+    font-family: inherit;
+    line-height: 1.5;
+    padding: calc(8 / 1440 * 100vw) 0;
+    font-size: calc(16 / 1440 * 100vw);
+}
+
+.todoText {
+    flex: 1;
+}
+
+.checked {
+    text-decoration: line-through;
+    color: #9ca3af;
+}
+
+.textarea::placeholder {
+    color: #9ca3af;
+}

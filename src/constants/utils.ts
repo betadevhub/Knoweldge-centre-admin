@@ -11,7 +11,13 @@ export const routes = {
     signin: '/signin',
     register: '/register',
     forgotPassword: '/forgot-password',
+    space: '/space',
 }
 
 export const URL = import.meta.env.VITE_BASE_URL;
 export const withCredentials = { withCredentials: true }
+
+export const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+
+export const baseWidth = 1440;
+ 

@@ -1,0 +1,152 @@
+import { useMemo, useEffect, useRef, useState } from 'react';
+import classes from './Block.module.css';
+import type { BLOCK_TYPE_MENU } from './types';
+import { blockTypes } from './constants';
+import { scale } from '../../helpers/space';
+
+export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [menuPosition, setMenuPosition] = useState(params.position);
+  const [isPositionCalculated, setIsPositionCalculated] = useState(false);
+
+  const filteredTypes = useMemo(() =>
+    blockTypes.filter(bt =>
+      bt.label.toLowerCase().includes(params.filter.toLowerCase())
+    ), [params.filter]
+  );
+
+  // Calculate optimal position with actual DOM measurements
+  useEffect(() => {
+    const calculatePosition = () => {
+      if (!menuRef.current) return;
+      
+      const VIEWPORT_PADDING = scale(10);
+      const VERTICAL_OFFSET = scale(5)
+      
+      // Get actual menu dimensions
+      const menuRect = menuRef.current.getBoundingClientRect();
+      const menuHeight = menuRect.height;
+      
+      let top = params.position.top;
+      let left = params.position.left;
+      
+      const spaceBelow = window.innerHeight - top - VERTICAL_OFFSET;
+      const spaceAbove = top - VERTICAL_OFFSET;
+      
+      if (spaceBelow < menuHeight && spaceAbove >= menuHeight) {
+        // Not enough space below, but enough above - position above
+        top = top - menuHeight - scale(48);
+      } else if (spaceBelow >= menuHeight) {
+        // Enough space below - position below (default)
+        top = top + VERTICAL_OFFSET;
+      } else {
+        // Not enough space either way, choose the better option
+        if (spaceAbove > spaceBelow) {
+          // More space above
+          top = Math.max(VIEWPORT_PADDING, top - menuHeight - VERTICAL_OFFSET);
+        } else {
+          // More space below or equal
+          top = Math.min(window.innerHeight - menuHeight - VIEWPORT_PADDING, top + VERTICAL_OFFSET);
+        }
+      }
+      
+      setMenuPosition({ top, left });
+      setIsPositionCalculated(true);
+    };
+
+    // Initial calculation
+    calculatePosition();
+    
+    // Recalculate on window resize
+    const handleResize = () => {
+      calculatePosition();
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [params.position, filteredTypes.length]); // Re-run when filteredTypes changes (affects height)
+
+  // Handle click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        params.onClose();
+      }
+    };
+
+    if (isPositionCalculated) {
+      // Small delay to avoid immediate closing
+      setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+      }, 0);
+    }
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [params.onClose, isPositionCalculated]);
+
+  // Handle escape key
+  useEffect(() => {
+    const handleEscapeKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        params.onClose();
+      }
+    };
+
+    if (isPositionCalculated) {
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+    
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [params.onClose, isPositionCalculated]);
+
+  return (
+    <div 
+      ref={menuRef}
+      className={classes.menu}
+      style={{ 
+        // Initial position (will be adjusted)
+        top: `calc(${menuPosition.top} / 1440 * 100vw)`, 
+        left: `calc(${menuPosition.left} / 1440 * 100vw)`, 
+        // Hide initially, show after calculation
+        visibility: isPositionCalculated ? 'visible' : 'hidden',
+        opacity: isPositionCalculated ? 1 : 0,
+        transition: 'opacity 0.15s ease',
+        // Ensure menu has a minimum width for consistent layout
+        minWidth: 'calc(200 / 1440 * 100vw)',
+        maxHeight: 'calc(400 / 1440 * 100vw)',
+        overflowY: 'auto'
+      }}
+    >
+      {filteredTypes.length > 0 ? (
+        <div className={classes.menuContent}>
+          {filteredTypes.map((blockType) => {
+            const Icon = blockType.icon;
+            return (
+              <button
+                key={blockType.type}
+                onClick={() => {
+                  params.onChangeBlockType(params.activeBlockId, blockType.type);
+                  params.onClose();
+                }}
+                className={classes.menuItem}
+                type="button"
+                onMouseDown={(e) => e.preventDefault()}
+              >
+                <Icon size={18} />
+                <span>{blockType.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <div className={classes.noResults}>
+          No block types found
+        </div>
+      )}
+    </div>
+  );
+}

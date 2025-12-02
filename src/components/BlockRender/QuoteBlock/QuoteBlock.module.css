@@ -1,0 +1,31 @@
+.quoteWrapper {
+  border-left: calc(4 / 1440 * 100vw) solid #d1d5db;
+  padding-left: calc(16 / 1440 * 100vw);
+}
+
+.quoteBar {
+  display: none;
+}
+
+.textarea {
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+  resize: none;
+  overflow: hidden;
+  border: none;
+  font-family: inherit;
+  line-height: 1.5;
+  padding: calc(8 / 1440 * 100vw) 0;
+  font-size: calc(16 / 1440 * 100vw);
+}
+
+.quoteText {
+  font-style: italic;
+  color: #374151;
+}
+
+.textarea::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}

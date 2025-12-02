@@ -61,7 +61,6 @@ select::placeholder {
 }
 
 
-
 @media screen and (max-width: 540px) {
   body {
     font-size: calc(14 / 414 * 100vw);

@@ -1,0 +1,87 @@
+.toolbar {
+    position: fixed;
+    background: white;
+    border: calc(1 / 1440 * 100vw) solid #e5e7eb;
+    border-radius: calc(8 / 1440 * 100vw);
+    box-shadow: 0 calc(4 / 1440 * 100vw) calc(20 / 1440 * 100vw) rgba(0, 0, 0, 0.15);
+    padding: calc(8 / 1440 * 100vw);
+    z-index: 1000;
+    display: flex;
+    gap: calc(2 / 1440 * 100vw);
+    transition: opacity 0.2s ease;
+}
+
+.toolbarContent {
+    display: flex;
+    gap: calc(2 / 1440 * 100vw);
+}
+
+.toolbarButton {
+    background: none;
+    border: none;
+    width: calc(36 / 1440 * 100vw);
+    height: calc(36 / 1440 * 100vw);
+    border-radius: calc(4 / 1440 * 100vw);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.toolbarButton:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+}
+
+.toolbarButton.active {
+    background-color: #e5e7eb;
+    color: #111827;
+}
+
+.colorPickerContainer {
+    position: relative;
+}
+
+.colorIndicator {
+    position: absolute;
+    bottom: calc(4 / 1440 * 100vw);
+    right: calc(4 / 1440 * 100vw);
+    width: calc(8 / 1440 * 100vw);
+    height: calc(8 / 1440 * 100vw);
+    border-radius: 50%;
+    border: calc(1 / 1440 * 100vw) solid white;
+}
+
+.colorPicker {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: calc(1 / 1440 * 100vw) solid #e5e7eb;
+    border-radius: calc(8 / 1440 * 100vw);
+    padding: calc(8 / 1440 * 100vw);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: calc(4 / 1440 * 100vw);
+    margin-top: calc(4 / 1440 * 100vw);
+    box-shadow: 0 calc(4 / 1440 * 100vw) calc(12 / 1440 * 100vw) rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+}
+
+.colorOption {
+    width: calc(20 / 1440 * 100vw);
+    height: calc(20 / 1440 * 100vw);
+    border-radius: calc(4 / 1440 * 100vw);
+    border: calc(1 / 1440 * 100vw) solid #e5e7eb;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s ease;
+}
+
+.colorOption:hover {
+    transform: scale(1.2);
+    border-color: #9ca3af;
+}

@@ -1,0 +1,23 @@
+.container {
+  min-height: 100vh;
+}
+
+.editorWrapper {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: calc(48 / 1440 * 100vw) calc(32 / 1440 * 100vw);
+}
+
+.title {
+  font-size: calc(36 / 1440 * 100vw);
+  font-weight: bold;
+  margin-bottom: calc(8 / 1440 * 100vw);
+  margin-left: calc(48 / 1440 * 100vw);
+  color: var(--color)
+}
+
+.blocksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 / 1440 * 100vw);
+}

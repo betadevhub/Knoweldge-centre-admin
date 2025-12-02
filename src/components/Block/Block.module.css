@@ -1,0 +1,117 @@
+.blockRow {
+  position: relative;
+  border-radius: calc(8 / 1440 * 100vw);
+  padding: calc(4 / 1440 * 100vw) calc(8 / 1440 * 100vw);
+  margin: 0 calc(-8 / 1440 * 100vw);
+}
+
+.blockRow.active {
+  background-color: #f3f4f6;
+}
+
+.blockActions {
+  position: absolute;
+  left: 0;
+  top: calc(4 / 1440 * 100vw);
+  display: flex;
+  gap: calc(4 / 1440 * 100vw);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.actionButton {
+  color: #9ca3af;
+  padding: calc(4 / 1440 * 100vw);
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(4 / 1440 * 100vw);
+}
+
+.actionButton:hover {
+  color: #4b5563;
+  background-color: #f3f4f6;
+}
+
+.blockContent {
+  margin-left: calc(48 / 1440 * 100vw);
+}
+
+.menu {
+  position: fixed;
+  background-color: white;
+  box-shadow: 0 calc(10 / 1440 * 100vw) calc(15 / 1440 * 100vw) calc(-3 / 1440 * 100vw) rgba(0, 0, 0, 0.1), 0 calc(4 / 1440 * 100vw) calc(6 / 1440 * 100vw) calc(-2 / 1440 * 100vw) rgba(0, 0, 0, 0.05);
+  border-radius: calc(8 / 1440 * 100vw);
+  border: calc(1 / 1440 * 100vw) solid #e5e7eb;
+  padding: calc(8 / 1440 * 100vw) 0;
+  width: calc(256 / 1440 * 100vw);
+  z-index: 50;
+  max-height: calc(300 / 1440 * 100vw);
+  overflow-y: auto;
+}
+
+.menuItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: calc(12 / 1440 * 100vw);
+  padding: calc(8 / 1440 * 100vw) calc(16 / 1440 * 100vw);
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #111827;
+  font-size: calc(14 / 1440 * 100vw);
+}
+
+.menuItem:hover {
+  background-color: #f3f4f6;
+}
+
+.menuItemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+}
+
+.noResults {
+  padding: calc(8 / 1440 * 100vw) calc(16 / 1440 * 100vw);
+  font-size: calc(14 / 1440 * 100vw);
+  color: #6b7280;
+  text-align: center;
+}
+
+.menu::-webkit-scrollbar {
+  width: calc(6 / 1440 * 100vw);
+}
+
+.menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.menu::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: calc(3 / 1440 * 100vw);
+}
+
+.menu::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.blockActions {
+  position: absolute;
+  left: 0;
+  top: calc(4 / 1440 * 100vw);
+  display: flex;
+  gap: calc(4 / 1440 * 100vw);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.visible {
+  opacity: 1;
+}

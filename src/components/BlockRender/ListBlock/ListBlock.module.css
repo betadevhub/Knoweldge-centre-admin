@@ -1,0 +1,62 @@
+/* ListBlock.module.css */
+.listWrapper {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.bullet {
+  color: #6b7280;
+  font-size: 20px;
+  line-height: 1.5;
+  margin-top: 3px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.textarea {
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+  resize: none;
+  overflow: hidden;
+  border: none;
+  font-family: inherit;
+  line-height: 1.5;
+  padding: 8px 0;
+  font-size: 16px;
+  flex: 1;
+}
+
+.listText {
+  margin: 0;
+}
+
+/* For contenteditable version */
+.listEditor {
+  width: 100%;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  font-family: inherit;
+  line-height: 1.5;
+  padding: 8px 0;
+  font-size: 16px;
+  flex: 1;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  cursor: text;
+  min-height: 24px;
+}
+
+.listEditor:empty:before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+.listEditor:focus {
+  outline: none;
+}
