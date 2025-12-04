@@ -10,6 +10,7 @@ export interface MENU_CARD {
 
 export interface MENU_CARD_LIST {
     title: string;
+    loading?: boolean;
     list: MENU_LIST[];
     titleIcon?: ReactNode;
     hasNextPage?: boolean;
@@ -23,7 +24,7 @@ export interface MENU_LIST {
     route: string;
 }
 
-export interface CATEGORIES{
+export interface CATEGORIES {
     _id: string;
     name: string;
     postCount: number;

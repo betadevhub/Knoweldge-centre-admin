@@ -1,0 +1,75 @@
+.container {
+    display: flex;
+    gap: calc(10 / 1440 * 100vw);
+    padding: 0 calc(25 / 1440 * 100vw);
+    font-size: calc(14 / 1440 * 100vw);
+    align-items: center;
+    position: sticky;
+    top: calc(20 / 1440 * 100vw);
+    z-index: 2;
+    background: #f9f9f7;
+}
+
+
+
+.container::before {
+    background: #f9f9f7;
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: calc(25 / 1440 * 100vw);
+    top: 0;
+    left: calc(215 / 1440 * 100vw);
+    z-index: 1;
+}
+
+.spaceHeaderText {
+    display: flex;
+    gap: calc(5 / 1440 * 100vw);
+    align-items: center;
+}
+
+.input {
+    font-size: calc(14 / 1440 * 100vw);
+    padding: calc(5 / 1440 * 100vw) calc(5 / 1440 * 100vw);
+    transition: var(--allTransition);
+    border: calc(2 / 1440 * 100vw) solid #f9f9f7;
+    border-radius: calc(5 / 1440 * 100vw);
+    margin-left: calc(-5 / 1440 * 100vw);
+    width: calc(300 / 1440 * 100vw);
+}
+
+.input:hover {
+    border-color: var(--blue);
+}
+
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: calc(20 / 1440 * 100vw);
+    margin-left: auto;
+}
+
+.lastPublished {
+    color: #a4a4a4;
+}
+
+.publishButton {
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--blue);
+    transition: var(--allTransition);
+}
+
+.publishButton:hover {
+    opacity: var(--opacity);
+}
+
+.save {
+    font-weight: bold;
+}
+
+.container button:hover {
+    text-decoration: underline;
+}

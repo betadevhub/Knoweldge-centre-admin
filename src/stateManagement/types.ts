@@ -1,4 +1,5 @@
 import type { TOAST_OBJECT, TOAST_TYPE } from "../components/Toast/types";
+import type { CATEGORIES_RESULT } from "../types";
 
 export interface USER {
     _id: string;
@@ -24,4 +25,14 @@ export interface USE_USER {
     navigate: (destination: string) => void
     logOut: () => void;
     getUser: () => void
+}
+
+export interface USE_CATEGORIES {
+    categoriesResult: CATEGORIES_RESULT | null;
+    loadingFirstFiveCategoriesResult: boolean;
+    firstFiveCategoriesResult: CATEGORIES_RESULT | null;
+    showCategoryCreationDialog: boolean;
+    toggleCategoryCreationDialog: () => void;
+    getCategoriesResult: () => void
+    getFirstFiveCategoriesResult: () => void
 }

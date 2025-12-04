@@ -9,7 +9,7 @@ export default function MenuCard(params: MENU_CARD) {
     return (
         <div onClick={() => params.func(params.route)} className={`${classes.menuCard} ${isActive ? classes.menuCardActive : 'F'}`}>
             {params.icon}
-            <p>{params.name}</p>
+            <p className={classes.menuCardName}>{params.name}</p>
         </div>
     )
 }

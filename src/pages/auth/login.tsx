@@ -6,7 +6,7 @@ import CardWrapper from '../../wrappers/CardWrapper';
 import InputList from '../../wrappers/InputListWrapper';
 import classes from './auth.module.css';
 import { routes, URL, withCredentials } from '../../constants/utils';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { LOGIN_VALUES } from './types';
 import { LoginValues } from './constant';
 import axios from 'axios';
@@ -17,24 +17,33 @@ import { useToast } from '../../stateManagement/useToast';
 export default function Login() {
     const navigate = useNavigate();
     const { handleAPIError } = useError();
-    const {addToast} = useToast();
+    const { addToast } = useToast();
     const [values, setValues] = useState<LOGIN_VALUES>(LoginValues);
+    const [loading, setLoading] = useState(false)
+
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setValues((prev) => ({ ...prev, [name]: value }));
     };
 
+    const disabled = useMemo(() => {
+        return !values.email || !values.password
+    }, [values])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e?.preventDefault();
+        setLoading(true)
         try {
             await axios.post(`${URL}/user/login`, values, withCredentials);
             addToast('success', 'Success', 'Welcome back');
             navigate(routes.home)
         } catch (error) {
             handleAPIError(error)
+        } finally {
+            setLoading(false)
         }
     }
+
 
     return (
         <div className={classes.container}>
@@ -42,7 +51,7 @@ export default function Login() {
                 <InputList cta={handleSubmit}>
                     <Input value={values.email} name='email' handleChange={handleInput} label='Email' placeholder='Name@example.com' type='email' size='large' />
                     <Input value={values.password} name='password' handleChange={handleInput} label='Password' placeholder='Your password' type='password' size='large' />
-                    <Button title="Log In" />
+                    <Button loading={loading} disabled={disabled} title="Log In" />
                 </InputList>
                 <AuthPrompt ctaFunc={() => { navigate(routes.forgotPassword) }} foreText="Did you forget your password?" ctaText='Reset Password.' />
             </CardWrapper>

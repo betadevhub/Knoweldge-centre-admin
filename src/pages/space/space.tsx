@@ -4,6 +4,7 @@ import type { BLOCK_TYPE, MENU_STATE } from './types';
 import Block from '../../components/Block/Block';
 import useBlocks from '../../hooks/useBlocks';
 import BlockTypeMenu from '../../components/Block/BlockTypeMenu';
+import SpaceHeader from '../../components/SpaceHeader/SpaceHeader';
 
 export default function Space() {
     const { blocks, activeBlock, setActiveBlock, addBlock, deleteBlock, updateBlock, changeBlockType, addBulletBlock } = useBlocks();
@@ -35,6 +36,7 @@ export default function Space() {
 
     return (
         <div className={classes.container}>
+            <SpaceHeader />
             <div className={classes.editorWrapper}>
                 <div className={classes.blocksContainer}>
                     {blocks.map((block) => (

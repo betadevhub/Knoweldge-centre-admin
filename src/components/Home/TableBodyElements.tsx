@@ -5,9 +5,10 @@ import TableBodyWrapper from "../../wrappers/TableBodyWrapper";
 import CheckBox from "../Input/CheckBox";
 import TableText from "../Table/TableText";
 import Kebab from "../kebab/kebab";
+import type { TABLE_BODY_ELEMENT } from "./types";
 
 
-export default function TableBodyElements() {
+export default function TableBodyElements(params:TABLE_BODY_ELEMENT) {
     return (
         <div>
             {
@@ -19,7 +20,7 @@ export default function TableBodyElements() {
                         <TableText title={numberFormat.format(c.postCount)} size={'small'} />
                         <TableText title={compactFormat.format(c.views)} size={'small'} />
                         <TableText title={c.updatedAt} size={'small'} />
-                        <Kebab />
+                        <Kebab handleKebab={params.handleKebab}  />
                         {/* <TableText title={''} size={'xSmall'} /> */}
 
                     </TableBodyWrapper>

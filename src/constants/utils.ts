@@ -12,6 +12,7 @@ export const routes = {
     register: '/register',
     forgotPassword: '/forgot-password',
     space: '/space',
+    categories: '/categories',
 }
 
 export const URL = import.meta.env.VITE_BASE_URL;

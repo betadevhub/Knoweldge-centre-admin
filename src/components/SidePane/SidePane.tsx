@@ -8,12 +8,19 @@ import { IoMdSettings } from 'react-icons/io';
 import { routes } from '../../constants/utils';
 import useNavigation from '../../hooks/navigation';
 import { formatCategories } from './helper';
-import { categories } from '../../temp/categories';
 import { useLocation } from 'react-router-dom';
+import { useCategories } from '../../stateManagement/useCategories';
+import { useEffect } from 'react';
+import { FaMinus } from 'react-icons/fa';
 
 export default function SidePane() {
     const { func } = useNavigation();
-    const {pathname: path} = useLocation();
+    const { pathname: path } = useLocation();
+    const { showCategoryCreationDialog, firstFiveCategoriesResult, getFirstFiveCategoriesResult, loadingFirstFiveCategoriesResult, toggleCategoryCreationDialog } = useCategories();
+
+    useEffect(() => {
+        getFirstFiveCategoriesResult()
+    }, [])
 
     if (restricted.includes(path)) return null
 
@@ -22,11 +29,15 @@ export default function SidePane() {
             <img src={logo} alt='Ticket lush logo' className={classes.logo} />
             <MenuCardList title='General' list={general} func={func} />
             <div className={classes.line1} />
-            <MenuCardList title='Categories' list={formatCategories(categories)} titleIcon={
-                <div className={classes.paneIconBackground}>
-                    <FiPlus className={classes.paneIcon} />
+            <MenuCardList title='Categories' list={formatCategories(firstFiveCategoriesResult?.categories || [])} titleIcon={
+                <div onClick={toggleCategoryCreationDialog} className={classes.paneIconBackground}>
+                    {!showCategoryCreationDialog ?
+                        <FiPlus className={classes.paneIcon} />
+                        : <FaMinus className={classes.paneIcon} />
+                    }
                 </div>
-            } hasNextPage={true}
+            } hasNextPage={firstFiveCategoriesResult?.pagination.hasNextPage}
+                loading={loadingFirstFiveCategoriesResult}
                 func={func}
             />
 

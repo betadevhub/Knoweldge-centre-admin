@@ -2,7 +2,8 @@ import type { ReactNode } from "react";
 
 
 export interface TABLE {
-    tableHeadElements: ReactNode
+    tableHeadElements: ReactNode;
+    tableBodyElements: ReactNode;
 };
 
 export interface TABLE_TEXT {

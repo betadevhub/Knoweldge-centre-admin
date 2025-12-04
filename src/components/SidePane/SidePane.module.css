@@ -88,3 +88,19 @@
 .line2 {
     margin-top: auto;
 }
+
+.noCategory{
+    padding: calc(10 / 1440 * 100vw);
+    color: #FFA000;
+}
+
+.menuCardName{
+    text-transform: capitalize;
+}
+
+
+.loaderContainer{
+    display: flex;
+    justify-content: center;
+    padding: calc(10 / 1440 * 100vw);
+}

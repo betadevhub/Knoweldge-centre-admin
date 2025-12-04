@@ -17,3 +17,12 @@
 .xSmall{
     width: 5%;
 }
+
+.tableText p{
+    transition: var(--allTransition);
+    cursor: pointer;
+}
+
+.tableText p:hover{
+    text-decoration: underline;
+}

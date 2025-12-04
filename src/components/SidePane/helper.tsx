@@ -5,6 +5,7 @@ import { routes } from "../../constants/utils"
 
 export const formatCategories = (categories: CATEGORIES[]) => {
     return categories?.map((c) => {
-        return { icon: <FcFolder className={classes.paneIcon} />, name: c.name, postCount: c.postCount, route: routes.activity }
+        const route= `${routes.categories}/${c._id}`
+        return { icon: <FcFolder className={classes.paneIcon} />, name: c.name, postCount: c.postCount, route }
     })
 }

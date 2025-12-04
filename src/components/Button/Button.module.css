@@ -4,4 +4,19 @@
     border-radius: calc(5 / 1440 * 100vw);
     background: var(--background);
     color: #fff;
+    cursor: pointer;
+    transition: var(--allTransition);
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+    gap: calc(10 / 1440 * 100vw);
+}
+
+.container:disabled{
+    cursor: not-allowed;
+    opacity: var(--opacity);
+}
+
+.container:not(:disabled):hover{
+    opacity: var(--opacity);
 }

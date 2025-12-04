@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    position: absolute;
+    width: calc(100% - calc(215 / 1440 * 100vw));
+    height: 100%;
+    top: 0;
+    left: calc(215 / 1440 * 100vw);
+    padding: calc(50 / 1440 * 100vw);
+    flex-direction: column;
+    z-index: 10;
+    align-items: center;
+}

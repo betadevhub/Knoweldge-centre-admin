@@ -30,3 +30,7 @@ export const styles = {
     warningButton: 'toast_warningButton',
     infoButton: 'toast_infoButton'
   };
+
+  export const CategoriesFilter ={
+    
+  }

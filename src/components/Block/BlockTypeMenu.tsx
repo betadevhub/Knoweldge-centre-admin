@@ -15,21 +15,25 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
     ), [params.filter]
   );
 
+
   // Calculate optimal position with actual DOM measurements
   useEffect(() => {
     const calculatePosition = () => {
       if (!menuRef.current) return;
       
       const VIEWPORT_PADDING = scale(10);
-      const VERTICAL_OFFSET = scale(5)
+      const VERTICAL_OFFSET = scale(5);
+      const HORIZONTAL_OFFSET = scale(5);
       
       // Get actual menu dimensions
       const menuRect = menuRef.current.getBoundingClientRect();
       const menuHeight = menuRect.height;
+      const menuWidth = menuRect.width;
       
       let top = params.position.top;
       let left = params.position.left;
       
+      // VERTICAL POSITIONING (your existing logic)
       const spaceBelow = window.innerHeight - top - VERTICAL_OFFSET;
       const spaceAbove = top - VERTICAL_OFFSET;
       
@@ -47,6 +51,27 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
         } else {
           // More space below or equal
           top = Math.min(window.innerHeight - menuHeight - VIEWPORT_PADDING, top + VERTICAL_OFFSET);
+        }
+      }
+      
+      // HORIZONTAL POSITIONING (new logic - same principle as vertical)
+      const spaceRight = window.innerWidth - left - HORIZONTAL_OFFSET;
+      const spaceLeft = left - HORIZONTAL_OFFSET;
+      
+      if (spaceRight < menuWidth && spaceLeft >= menuWidth) {
+        // Not enough space to the right, but enough to the left - position to the left
+        left = left - menuWidth + scale(25);
+      } else if (spaceRight >= menuWidth) {
+        // Enough space to the right - position to the right (default)
+        left = left + HORIZONTAL_OFFSET;
+      } else {
+        // Not enough space either way, choose the better option
+        if (spaceLeft > spaceRight) {
+          // More space to the left
+          left = Math.max(VIEWPORT_PADDING, left - menuWidth - HORIZONTAL_OFFSET);
+        } else {
+          // More space to the right or equal
+          left = Math.min(window.innerWidth - menuWidth - VIEWPORT_PADDING, left + HORIZONTAL_OFFSET);
         }
       }
       
