@@ -3,13 +3,17 @@ import type { USE_CATEGORIES } from "./types";
 import { useError } from "./useError";
 import axios from "axios";
 import { URL, withCredentials } from "../constants/utils";
+import { buildFilter } from "../helpers/util";
+import type { BUILD_FILTER } from "../types";
 
 export const useCategories = create<USE_CATEGORIES>((set) => ({
     categoriesResult: null,
     firstFiveCategoriesResult: null,
     loadingFirstFiveCategoriesResult: false,
+    loadingCategoriesResult: false,
     categoriesFilter: {},
     showCategoryCreationDialog: false,
+    categoriesLastFetchedTimeStamp: '',
 
     toggleCategoryCreationDialog: () => {
         set((state) => ({
@@ -27,20 +31,24 @@ export const useCategories = create<USE_CATEGORIES>((set) => ({
 
         } catch (error) {
             useError.getState().handleAPIError(error)
-        } finally{
+        } finally {
             set({ loadingFirstFiveCategoriesResult: false })
         }
     },
 
-    getCategoriesResult: async () => {
+    getCategoriesResult: async (filter: BUILD_FILTER) => {
         try {
-            const { data } = await axios.get(`${URL}/category`, withCredentials);
+            set({ loadingCategoriesResult: true });
+            const { data } = await axios.get(`${URL}/category?${buildFilter(filter)}`, withCredentials);
             set({
                 categoriesResult: data.data
             })
+            set({ categoriesLastFetchedTimeStamp: new Date() })
 
         } catch (error) {
             useError.getState().handleAPIError(error)
+        } finally {
+            set({ loadingCategoriesResult: false })
         }
     }
 }))

@@ -5,7 +5,7 @@ export interface MAIN_WRAPPER {
 }
 
 export interface QUERY_CARD_WRAPPER extends MAIN_WRAPPER {
-    background?: string
+    background?: string;
 }
 
 

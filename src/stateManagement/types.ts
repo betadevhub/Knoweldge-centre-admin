@@ -1,5 +1,5 @@
 import type { TOAST_OBJECT, TOAST_TYPE } from "../components/Toast/types";
-import type { CATEGORIES_RESULT } from "../types";
+import type { BUILD_FILTER, CATEGORIES_RESULT } from "../types";
 
 export interface USER {
     _id: string;
@@ -30,9 +30,12 @@ export interface USE_USER {
 export interface USE_CATEGORIES {
     categoriesResult: CATEGORIES_RESULT | null;
     loadingFirstFiveCategoriesResult: boolean;
+    loadingCategoriesResult: boolean;
     firstFiveCategoriesResult: CATEGORIES_RESULT | null;
     showCategoryCreationDialog: boolean;
+    categoriesLastFetchedTimeStamp: Date | string;
     toggleCategoryCreationDialog: () => void;
-    getCategoriesResult: () => void
-    getFirstFiveCategoriesResult: () => void
+    getCategoriesResult: (filter: BUILD_FILTER) => void;
+    getFirstFiveCategoriesResult: () => void;
+
 }

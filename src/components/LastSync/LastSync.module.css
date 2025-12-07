@@ -1,0 +1,25 @@
+
+.refreshIcon{
+    cursor: pointer;
+    transition: var(--allTransition);
+}
+
+.refreshIcon:hover{
+    opacity: var(--opacity);
+}
+
+.loading {
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.lastFetched{
+    font-size: calc(12 / 1440 * 100vw);
+    font-weight: normal;
+    color: var(--paneColor);
+}

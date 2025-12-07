@@ -12,3 +12,9 @@ export const cards = [
     { icon: <IoPersonOutline className={classes.cardIcon} />, name: 'Manage collaborators', route: routes.collaborators, description: 'Add, remove, and oversee team members who maintain content.', color: '#936000' },
     { icon: <PiSealQuestion className={classes.cardIcon} />, name: 'Manage FAQ', route: routes.faq, description: 'Update responses, add new entries, in the FAQ section.', color: '#006793' },
 ]
+
+export const filterList = [
+    { title: 'Date Created', name: 'Date', type: 'date', c: 2 },
+    { title: 'View Count', name: 'Views', type: 'number', c: 2 },
+    { title: 'Post Count', name: 'PostCount', type: 'number', c: 2 },
+]

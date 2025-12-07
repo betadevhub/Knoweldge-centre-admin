@@ -29,3 +29,4 @@ export interface CATEGORIES_RESULT {
 export interface BUILD_FILTER {
     [key: string]: string | boolean | number | undefined | null;
 }
+

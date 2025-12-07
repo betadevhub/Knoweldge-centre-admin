@@ -1,4 +1,4 @@
-import type { BLOCK, BLOCK_TYPE, MENU_STATE } from "../../pages/space/types";
+import type { BLOCK, BLOCK_TYPE, BLOCK_TYPE_OPTION, MENU_STATE } from "../../pages/space/types";
 import type { INPUT_EVENT, KEYBOARD_EVENT } from "../BlockRender/types";
 
 export interface BLOCK_PROPS {
@@ -33,4 +33,8 @@ export interface BLOCK_TYPE_MENU {
     filter: string;
     onChangeBlockType: (id: string, newType: BLOCK_TYPE) => void;
     onClose: () => void;
+    forSubClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    typeList: BLOCK_TYPE_OPTION[];
 }
+
+

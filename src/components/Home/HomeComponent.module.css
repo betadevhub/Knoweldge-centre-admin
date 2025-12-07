@@ -9,6 +9,7 @@
     font-size: calc(24 / 1440 * 100vw);
     font-weight: bold;
     line-height: calc((0.96 * 24) / 1440 * 100vw);
+    text-transform: capitalize;
 }
 
 .description {

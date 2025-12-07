@@ -41,7 +41,7 @@ export default function CreateCategoryDialog() {
                         ...(state.firstFiveCategoriesResult?.categories || []).slice(0, 4)
                     ] // newItem + first 4 existing = max 5 items
                 },
-                categories: {
+                categoriesResult: {
                     ...state.categoriesResult,
                     categories: [newItem, ...(state.categoriesResult?.categories || [])]
                 }

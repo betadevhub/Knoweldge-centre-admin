@@ -1,8 +1,51 @@
+.parent {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(5 / 1440 * 100vw);
+    width: 100%;
+}
+
 .container {
     background: #fff;
     border-radius: calc(5 / 1440 * 100vw);
     overflow: hidden;
     border: solid calc(1 / 1440 * 100vw) var(--lightOutline);
+    width: 100%;
+}
+
+
+
+
+.filterParent {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: calc(10 / 1440 * 100vw);
+}
+
+
+.filterContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: calc(10 / 1440 * 100vw);
+
+}
+
+.filterIndividualContainer {
+    width: 100%;
+    background: #f9f9f7;
+    border-radius: calc(5 / 1440 * 100vw);
+    border: solid calc(1 / 1440 * 100vw) var(--lightOutline);
+    padding: calc(10 / 1440 * 100vw);
+    font-size: calc(12 / 1440 * 100vw);
+    display: flex;
+    flex-direction: column;
+    gap: calc(5 / 1440 * 100vw);
+}
+
+.filterTitle {
+    font-weight: bold;
 }
 
 
@@ -14,15 +57,91 @@
     width: 7%;
 }
 
-.xSmall{
+.xSmall {
     width: 5%;
 }
 
-.tableText p{
+.tableText p {
+    transition: var(--allTransition);
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+.large p:hover {
+    text-decoration: underline;
+}
+
+.filterInputGroup {
+    display: flex;
+    gap: calc(5 / 1440 * 100vw);
+    width: 100%;
+    overflow: hidden;
+}
+
+.filterInput {
+    background: #fff;
+    display: flex;
+    width: 100%;
+    padding: calc(5 / 1440 * 100vw);
+    font-size: calc(12 / 1440 * 100vw);
+}
+
+.filterInput::placeholder{
+    color: var(--paneColor);
+}
+
+.titleContainer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.filterCta {
+    font-size: calc(10 / 1440 * 100vw);
+    color: var(--paneColor);
+    font-weight: normal;
     transition: var(--allTransition);
     cursor: pointer;
 }
 
-.tableText p:hover{
-    text-decoration: underline;
+.filterCta:hover {
+    color: var(--blue);
+}
+
+.closeFilterButton {
+    color: #fff;
+    font-size: calc(12 / 1440 * 100vw);
+    padding: calc(5 / 1440 * 100vw);
+    border-radius: calc(5 / 1440 * 100vw);
+    gap: calc(5 / 1440 * 100vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background);
+    flex: 1;
+    cursor: pointer;
+    transition: var(--allTransition);
+}
+
+
+
+.ctaGroup{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.saveButton{
+    background: #00592b;
+}
+
+.closeFilterButton:hover{
+    opacity: var(--opacity);
+}
+
+
+.sortText{
+    font-size: calc(10 / 1440 * 100vw);
+    color: var(--paneColor);
 }

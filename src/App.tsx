@@ -9,6 +9,7 @@ import Register from './pages/auth/register'
 import ToastContainer from './components/Toast/ToastContainer'
 import Space from './pages/space/space'
 import CreateCategoryDialog from './components/createCategoryDialog/createCategoryDialog'
+import Contents from './pages/content/Content'
 
 
 function App() {
@@ -19,11 +20,12 @@ function App() {
         <ToastContainer />
         <SidePane />
         <MainWrapper>
-          <CreateCategoryDialog/>
+          <CreateCategoryDialog />
           <Routes>
             <Route path={routes.home} element={<Home />} />
             <Route path={routes.signin} element={<Login />} />
             <Route path={routes.register} element={<Register />} />
+            <Route path={`${routes.categories}/:id`} element={<Contents />} />
             <Route path={`${routes.space}/:id`} element={<Space />} />
           </Routes>
         </MainWrapper>

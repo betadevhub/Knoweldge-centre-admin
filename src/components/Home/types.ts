@@ -16,11 +16,16 @@ export interface CARD_LIST {
     func: (r: string) => void
 }
 
-export interface CARD_ITEM_LIST extends MENU_LIST{
+export interface CARD_ITEM_LIST extends MENU_LIST {
     description: string;
     color: string;
 }
 
-export interface TABLE_BODY_ELEMENT{
+export interface TABLE_BODY_ELEMENT {
     handleKebab: (e: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+
+export interface TABLE_HEAD_ELEMENT {
+    sort?: string
 }

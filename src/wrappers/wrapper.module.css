@@ -6,7 +6,7 @@
 }
 
 .queryCard {
-    min-width: calc(124 / 1440 * 100vw);
+    min-width: calc(100 / 1440 * 100vw);
     height: calc(28 / 1440 * 100vw);
     padding: 0 calc(10 / 1440 * 100vw);
     font-size: calc(11 / 1440 * 100vw);

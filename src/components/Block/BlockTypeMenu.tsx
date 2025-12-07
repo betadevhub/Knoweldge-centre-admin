@@ -1,16 +1,17 @@
 import { useMemo, useEffect, useRef, useState } from 'react';
 import classes from './Block.module.css';
 import type { BLOCK_TYPE_MENU } from './types';
-import { blockTypes } from './constants';
 import { scale } from '../../helpers/space';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
 export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
   const menuRef = useRef<HTMLDivElement>(null);
   const [menuPosition, setMenuPosition] = useState(params.position);
   const [isPositionCalculated, setIsPositionCalculated] = useState(false);
 
+
   const filteredTypes = useMemo(() =>
-    blockTypes.filter(bt =>
+    params.typeList.filter(bt =>
       bt.label.toLowerCase().includes(params.filter.toLowerCase())
     ), [params.filter]
   );
@@ -20,23 +21,23 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
   useEffect(() => {
     const calculatePosition = () => {
       if (!menuRef.current) return;
-      
+
       const VIEWPORT_PADDING = scale(10);
       const VERTICAL_OFFSET = scale(5);
       const HORIZONTAL_OFFSET = scale(5);
-      
+
       // Get actual menu dimensions
       const menuRect = menuRef.current.getBoundingClientRect();
       const menuHeight = menuRect.height;
       const menuWidth = menuRect.width;
-      
+
       let top = params.position.top;
       let left = params.position.left;
-      
+
       // VERTICAL POSITIONING (your existing logic)
       const spaceBelow = window.innerHeight - top - VERTICAL_OFFSET;
       const spaceAbove = top - VERTICAL_OFFSET;
-      
+
       if (spaceBelow < menuHeight && spaceAbove >= menuHeight) {
         // Not enough space below, but enough above - position above
         top = top - menuHeight - scale(48);
@@ -53,11 +54,11 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
           top = Math.min(window.innerHeight - menuHeight - VIEWPORT_PADDING, top + VERTICAL_OFFSET);
         }
       }
-      
+
       // HORIZONTAL POSITIONING (new logic - same principle as vertical)
       const spaceRight = window.innerWidth - left - HORIZONTAL_OFFSET;
       const spaceLeft = left - HORIZONTAL_OFFSET;
-      
+
       if (spaceRight < menuWidth && spaceLeft >= menuWidth) {
         // Not enough space to the right, but enough to the left - position to the left
         left = left - menuWidth + scale(25);
@@ -74,19 +75,19 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
           left = Math.min(window.innerWidth - menuWidth - VIEWPORT_PADDING, left + HORIZONTAL_OFFSET);
         }
       }
-      
+
       setMenuPosition({ top, left });
       setIsPositionCalculated(true);
     };
 
     // Initial calculation
     calculatePosition();
-    
+
     // Recalculate on window resize
     const handleResize = () => {
       calculatePosition();
     };
-    
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [params.position, filteredTypes.length]); // Re-run when filteredTypes changes (affects height)
@@ -105,7 +106,7 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
         document.addEventListener('mousedown', handleClickOutside);
       }, 0);
     }
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -122,20 +123,20 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
     if (isPositionCalculated) {
       document.addEventListener('keydown', handleEscapeKey);
     }
-    
+
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
     };
   }, [params.onClose, isPositionCalculated]);
 
   return (
-    <div 
+    <div
       ref={menuRef}
       className={classes.menu}
-      style={{ 
+      style={{
         // Initial position (will be adjusted)
-        top: `calc(${menuPosition.top} / 1440 * 100vw)`, 
-        left: `calc(${menuPosition.left} / 1440 * 100vw)`, 
+        top: `calc(${menuPosition.top} / 1440 * 100vw)`,
+        left: `calc(${menuPosition.left} / 1440 * 100vw)`,
         // Hide initially, show after calculation
         visibility: isPositionCalculated ? 'visible' : 'hidden',
         opacity: isPositionCalculated ? 1 : 0,
@@ -152,10 +153,20 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
             const Icon = blockType.icon;
             return (
               <button
+                name={blockType.type}
+                style={{ color: blockType.color }}
                 key={blockType.type}
-                onClick={() => {
-                  params.onChangeBlockType(params.activeBlockId, blockType.type);
-                  params.onClose();
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent event bubbling
+
+                  if (blockType.sub) {
+                    // Has submenu - trigger submenu handler
+                    params.forSubClick?.(e);
+                  } else {
+                    // No submenu - close and change block type
+                    params.onClose();
+                    params.onChangeBlockType(params.activeBlockId, blockType.type);
+                  }
                 }}
                 className={classes.menuItem}
                 type="button"
@@ -163,6 +174,7 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
               >
                 <Icon size={18} />
                 <span>{blockType.label}</span>
+                {blockType.sub && <MdKeyboardArrowRight className={classes.rightAnchor} />}
               </button>
             );
           })}
@@ -171,7 +183,8 @@ export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
         <div className={classes.noResults}>
           No block types found
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }

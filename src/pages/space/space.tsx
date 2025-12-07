@@ -5,6 +5,7 @@ import Block from '../../components/Block/Block';
 import useBlocks from '../../hooks/useBlocks';
 import BlockTypeMenu from '../../components/Block/BlockTypeMenu';
 import SpaceHeader from '../../components/SpaceHeader/SpaceHeader';
+import { blockTypes } from '../../components/Block/constants';
 
 export default function Space() {
     const { blocks, activeBlock, setActiveBlock, addBlock, deleteBlock, updateBlock, changeBlockType, addBulletBlock } = useBlocks();
@@ -31,8 +32,6 @@ export default function Space() {
         changeBlockType(id, newType);
         setMenuState(prev => ({ ...prev, isOpen: false }));
     };
-
-
 
     return (
         <div className={classes.container}>
@@ -63,6 +62,7 @@ export default function Space() {
                     filter={menuState.filter}
                     onChangeBlockType={handleChangeBlockType}
                     onClose={() => setMenuState(prev => ({ ...prev, isOpen: false }))}
+                    typeList={blockTypes}
                 />
             )}
         </div>

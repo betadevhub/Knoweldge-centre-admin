@@ -28,8 +28,12 @@ export interface BLOCK_TYPE_OPTION {
   type: BLOCK_TYPE;
   label: string;
   icon: React.ComponentType<{ size?: number }>;
-  placeholder: string;
+  placeholder?: string;
+  color?: string
+  sub?: BLOCK_TYPE_OPTION[]
 }
+
+
 
 export interface MENU_STATE {
   isOpen: boolean;
