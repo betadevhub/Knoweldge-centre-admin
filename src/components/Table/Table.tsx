@@ -1,5 +1,4 @@
 import TableHeadWrapper from '../../wrappers/TableHeadWrapper';
-import { filterList } from '../Home/constant';
 import QueryCard from '../QueryCard/QueryCard';
 import Filter from './Filter';
 import classes from './Table.module.css';
@@ -16,7 +15,7 @@ export default function Table(params: TABLE) {
                 </TableHeadWrapper>
                 {params.tableBodyElements}
             </div>
-            <Filter filter={params.filter} filterDialogState={params.filterDialogState} toggleFilterDialog={params.toggleFilterDialog} filterList={filterList} handleMultiFilterChange={params.handleMultiFilterChange} />
+            <Filter filter={params.filter} filterDialogState={params.filterDialogState} toggleFilterDialog={params.toggleFilterDialog} filterList={params.filterList} handleMultiFilterChange={params.handleMultiFilterChange} />
         </div>
     )
 }

@@ -1,19 +1,28 @@
-import { useState } from 'react';
 import classes from './space.module.css';
-import type { BLOCK_TYPE, MENU_STATE } from './types';
+import type { BLOCK_TYPE } from './types';
 import Block from '../../components/Block/Block';
 import useBlocks from '../../hooks/useBlocks';
 import BlockTypeMenu from '../../components/Block/BlockTypeMenu';
 import SpaceHeader from '../../components/SpaceHeader/SpaceHeader';
 import { blockTypes } from '../../components/Block/constants';
+import { useKebab } from '../../hooks/kebab';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
+import { URL, withCredentials } from '../../constants/utils';
+import { useError } from '../../stateManagement/useError';
 
 export default function Space() {
-    const { blocks, activeBlock, setActiveBlock, addBlock, deleteBlock, updateBlock, changeBlockType, addBulletBlock } = useBlocks();
-    const [menuState, setMenuState] = useState<MENU_STATE>({
-        isOpen: false,
-        position: { top: 0, left: 0 },
-        filter: ''
-    });
+    const { handleAPIError } = useError();
+    const { menuState, setMenuState } = useKebab();
+    const { blocks, activeBlock, setActiveBlock, addBlock, deleteBlock, updateBlock, changeBlockType, addBulletBlock, setBlocks } = useBlocks();
+    const [searchParams] = useSearchParams() || {};
+    const postId = searchParams.get('postId')
+
+
+
+    const [fetchingBlocks, setFetchingBlocks] = useState(false);
+    const [existingName, setExistingName] = useState('')
 
     const handleInput = (id: string, content: string, e: React.FormEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         updateBlock(id, { content });
@@ -33,9 +42,40 @@ export default function Space() {
         setMenuState(prev => ({ ...prev, isOpen: false }));
     };
 
+
+    const fetchBlocks = async () => {
+        setFetchingBlocks(true)
+        try {
+            const res = await axios.get(`${URL}/content?postId=${postId}`, withCredentials);
+            const contents = res.data?.data?.contents
+            setBlocks(contents);
+            setExistingName(contents[0]?.postDetails?.name);
+
+        } catch (error) {
+            handleAPIError(error)
+
+        } finally {
+            setFetchingBlocks(false)
+        }
+    }
+
+    useEffect(() => {
+        if (postId) {
+            console.log(postId)
+            fetchBlocks()
+        }
+    }, [postId])
+
+
+    if (fetchingBlocks) {
+        return (
+            <p>Fetching Blocks...</p>
+        )
+    }
+
     return (
         <div className={classes.container}>
-            <SpaceHeader />
+            <SpaceHeader blocks={blocks} setBlocks={setBlocks} existingName={existingName} />
             <div className={classes.editorWrapper}>
                 <div className={classes.blocksContainer}>
                     {blocks.map((block) => (
@@ -55,16 +95,15 @@ export default function Space() {
                 </div>
             </div>
 
-            {menuState.isOpen && (
-                <BlockTypeMenu
-                    activeBlockId={activeBlock}
-                    position={menuState.position}
-                    filter={menuState.filter}
-                    onChangeBlockType={handleChangeBlockType}
-                    onClose={() => setMenuState(prev => ({ ...prev, isOpen: false }))}
-                    typeList={blockTypes}
-                />
-            )}
+            <BlockTypeMenu
+                activeBlockId={activeBlock}
+                position={menuState.position}
+                filter={menuState.filter}
+                onChangeBlockType={handleChangeBlockType}
+                onClose={() => setMenuState(prev => ({ ...prev, isOpen: false }))}
+                typeList={blockTypes}
+                isOpen={menuState.isOpen}
+            />
         </div>
     );
 }

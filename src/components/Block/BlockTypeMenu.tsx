@@ -5,6 +5,9 @@ import { scale } from '../../helpers/space';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 export default function BlockTypeMenu(params: BLOCK_TYPE_MENU) {
+
+  if (!params.isOpen) return;
+
   const menuRef = useRef<HTMLDivElement>(null);
   const [menuPosition, setMenuPosition] = useState(params.position);
   const [isPositionCalculated, setIsPositionCalculated] = useState(false);

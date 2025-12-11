@@ -7,7 +7,7 @@ export const numberFormat = Intl.NumberFormat('en-NG', {
 
 export const compactFormat = Intl.NumberFormat('en-Ng', {
     notation: 'compact',
-    minimumFractionDigits:0,
+    minimumFractionDigits: 0,
     maximumFractionDigits: 3
 });
 
@@ -53,4 +53,15 @@ export const dateFormat = (dateStr: string, includeTime = false) => {
 
         return formattedDate;
     }
+};
+
+export const hoursFormat = (seconds: number) => {
+    if (!seconds || isNaN(seconds)) return '0h:00m';
+
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+
+    return `${hours}h:${formattedMinutes}m`;
 };

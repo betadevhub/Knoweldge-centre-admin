@@ -7,12 +7,15 @@ import { buildFilter } from "../helpers/util";
 import type { BUILD_FILTER } from "../types";
 
 export const useCategories = create<USE_CATEGORIES>((set) => ({
-    categoriesResult: null,
-    firstFiveCategoriesResult: null,
+
     loadingFirstFiveCategoriesResult: false,
     loadingCategoriesResult: false,
-    categoriesFilter: {},
+    loadingCategoriesByIdResult: false,
     showCategoryCreationDialog: false,
+    categoriesByIdResult: null,
+    categoriesResult: null,
+    firstFiveCategoriesResult: null,
+    categoriesByIdLastFetchedTimeStamp: '',
     categoriesLastFetchedTimeStamp: '',
 
     toggleCategoryCreationDialog: () => {
@@ -49,6 +52,22 @@ export const useCategories = create<USE_CATEGORIES>((set) => ({
             useError.getState().handleAPIError(error)
         } finally {
             set({ loadingCategoriesResult: false })
+        }
+    },
+
+    getCategoriesByIdResult: async (id: string) => {
+        try {
+            set({ loadingCategoriesByIdResult: true });
+            const { data } = await axios.get(`${URL}/category/${id}`, withCredentials);
+            set({
+                categoriesByIdResult: data.data.category
+            })
+            set({ categoriesByIdLastFetchedTimeStamp: new Date() })
+
+        } catch (error) {
+            useError.getState().handleAPIError(error)
+        } finally {
+            set({ loadingCategoriesByIdResult: false })
         }
     }
 }))

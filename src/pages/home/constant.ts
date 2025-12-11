@@ -43,6 +43,17 @@ export const viewsSortTree: BLOCK_TYPE_OPTION[] = [
     { type: '+views', label: 'lowest to highest', icon: MdOutlineUpdate },
 ];
 
+export const videoDurationSortTree: BLOCK_TYPE_OPTION[] = [
+    { type: '-videoDuration', label: 'highest to lowest', icon: MdOutlineSchedule },
+    { type: '+videoDuration', label: 'lowest to highest', icon: MdOutlineUpdate },
+];
+
+export const readDurationSortTree: BLOCK_TYPE_OPTION[] = [
+    { type: '-readDuration', label: 'highest to lowest', icon: MdOutlineSchedule },
+    { type: '+readDuration', label: 'lowest to highest', icon: MdOutlineUpdate },
+];
+
+
 export const sortedTypeListSubTree: { [x: string]: BLOCK_TYPE_OPTION[] } = {
     createdDate: createdDateSortTree,
     updatedDate: updatedDateSortTree,
@@ -57,7 +68,9 @@ export const sortInterpretationTree: { [x: string]: BLOCK_TYPE_OPTION[] } = {
     updatedAt: updatedDateSortTree,
     name: nameSortTree,
     postCount: postCountSortTree,
-    views: viewsSortTree
+    views: viewsSortTree,
+    videoDuration: videoDurationSortTree,
+    readDuration: readDurationSortTree
 }
 
 export const textMatchTree: { [x: string]: string } = {

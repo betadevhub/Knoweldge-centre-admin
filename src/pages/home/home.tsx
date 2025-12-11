@@ -1,61 +1,36 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CardList from "../../components/Home/cardList";
-import { cards } from "../../components/Home/constant";
+import { cards, filterList } from "../../components/Home/constant";
 import Intro from "../../components/Home/Intro";
 import TableHeadElements from "../../components/Home/TableHeadElements";
 import Table from "../../components/Table/Table";
 import useNavigation from "../../hooks/navigation";
-import type { MENU_STATE } from "../space/types";
 import BlockTypeMenu from "../../components/Block/BlockTypeMenu";
 import TableBodyElements from "../../components/Home/TableBodyElements";
 import { blockTypes, sortTypeList } from "./constant";
 import { GetCategoriesFilter } from "../../stateManagement/defaultValues";
 import { getInterpretation } from "./helper";
 import { useCategories } from "../../stateManagement/useCategories";
-import type { BUILD_FILTER } from "../../types";
+import useFilter from "../../hooks/filter";
+import { useKebab } from "../../hooks/kebab";
 
 
 export default function Home() {
     const { func } = useNavigation();
+    const { menuState, handleKebab, setMenuState } = useKebab();
     const { getCategoriesResult, loadingCategoriesResult, categoriesLastFetchedTimeStamp } = useCategories();
+    const { filter, filterDialogState, handleFilterChange, handleMultiFilterChange, toggleFilterDialog } = useFilter({
+        fil: GetCategoriesFilter
+    })
 
-    const [filter, setFilter] = useState<BUILD_FILTER>(GetCategoriesFilter);
-    const [filterDialogState, setFilterDialogState] = useState(false);
-
-    const [menuState, setMenuState] = useState<MENU_STATE>({
-        isOpen: false,
-        position: { top: 0, left: 0 },
-        filter: ''
-    });
-
-    const handleFilterChange = (name: string, value: string) => {
-        setFilter((prev) => ({ ...prev, [name]: value }));
-    }
-
-    const handleMultiFilterChange = (values: BUILD_FILTER) => {
-        setFilter(values);
-    }
-
-    const handleKebab = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setMenuState({
-            isOpen: true,
-            position: { top: rect.bottom + window.scrollY, left: rect.left },
-            filter: ''
-        });
-    };
-
-    const toggleFilterDialog = () => {
-        setFilterDialogState(prev => !prev)
-    }
 
 
     const fetchCategories = () => {
-         getCategoriesResult(filter); 
-        }
+        getCategoriesResult(filter);
+    }
 
     useEffect(() => {
-        fetchCategories()
+        fetchCategories();
     }, [filter])
 
 
@@ -76,19 +51,18 @@ export default function Home() {
                 loading={loadingCategoriesResult}
                 fetch={fetchCategories}
                 lastFetched={categoriesLastFetchedTimeStamp}
+                filterList={filterList}
             />
 
-            {menuState.isOpen && (
-                <BlockTypeMenu
-                    activeBlockId={'1'}
-                    position={menuState.position}
-                    filter={menuState.filter}
-                    onChangeBlockType={() => { }}
-                    onClose={() => setMenuState(prev => ({ ...prev, isOpen: false }))}
-                    typeList={blockTypes}
-
-                />
-            )}
+            <BlockTypeMenu
+                activeBlockId={'1'}
+                position={menuState.position}
+                filter={menuState.filter}
+                onChangeBlockType={() => { }}
+                onClose={() => setMenuState(prev => ({ ...prev, isOpen: false }))}
+                typeList={blockTypes}
+                isOpen={menuState.isOpen}
+            />
         </div>
     )
 }

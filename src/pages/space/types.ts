@@ -1,3 +1,6 @@
+import type { CATEGORIES } from "../../components/SidePane/types";
+import type { PAGINATION } from "../../types";
+
 // types/block.ts
 export type BLOCK_TYPE = string
   | 'text'
@@ -12,7 +15,6 @@ export type BLOCK_TYPE = string
   | 'link';
 
 export interface BLOCK {
-  // format: any;
   id: string;
   type: string;
   content: string;
@@ -39,4 +41,23 @@ export interface MENU_STATE {
   isOpen: boolean;
   position: { top: number; left: number };
   filter: string;
+}
+
+export interface POSTS {
+  _id: string;
+  name: string;
+  views: number;
+  postCount: number;
+  videoDuration: number;
+  readDuration: number;
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
+  category: CATEGORIES;
+}
+
+
+export interface POSTS_RESULT {
+  posts: POSTS[];
+  pagination: PAGINATION;
 }

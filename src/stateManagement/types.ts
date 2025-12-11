@@ -1,4 +1,6 @@
+import type { CATEGORIES } from "../components/SidePane/types";
 import type { TOAST_OBJECT, TOAST_TYPE } from "../components/Toast/types";
+import type { POSTS, POSTS_RESULT } from "../pages/space/types";
 import type { BUILD_FILTER, CATEGORIES_RESULT } from "../types";
 
 export interface USER {
@@ -28,14 +30,30 @@ export interface USE_USER {
 }
 
 export interface USE_CATEGORIES {
-    categoriesResult: CATEGORIES_RESULT | null;
     loadingFirstFiveCategoriesResult: boolean;
     loadingCategoriesResult: boolean;
-    firstFiveCategoriesResult: CATEGORIES_RESULT | null;
     showCategoryCreationDialog: boolean;
+    loadingCategoriesByIdResult: boolean;
+    categoriesByIdResult: CATEGORIES | null;
+    firstFiveCategoriesResult: CATEGORIES_RESULT | null;
+    categoriesResult: CATEGORIES_RESULT | null;
+    categoriesByIdLastFetchedTimeStamp: Date | string;
     categoriesLastFetchedTimeStamp: Date | string;
     toggleCategoryCreationDialog: () => void;
     getCategoriesResult: (filter: BUILD_FILTER) => void;
     getFirstFiveCategoriesResult: () => void;
+    getCategoriesByIdResult: (id: string) => void;
+}
 
+
+
+export interface USE_POSTS {
+    postsResult: POSTS_RESULT | null;
+    postByIdResult: POSTS | null;
+    loadingPostsResult: boolean;
+    loadingPostsByIdResult: boolean;
+    postsLastFetchedTimeStamp: Date | string;
+    postsByIdLastFetchedTimeStamp: Date | string;
+    getPostsResult: (filter: BUILD_FILTER) => void;
+    getPostsByIdResult: (id: string) => void;
 }

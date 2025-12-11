@@ -6,20 +6,14 @@ import type { BLOCK_TYPE_OPTION, MENU_STATE } from '../../pages/space/types';
 import BlockTypeMenu from '../Block/BlockTypeMenu';
 import { scale } from '../../helpers/space';
 import { sortedTypeListSubTree } from '../../pages/home/constant';
+import { useKebab } from '../../hooks/kebab';
 
 
 export default function SelectCard(params: SELECT_CARD) {
+    const { menuState, handleKebab, setMenuState } = useKebab();
 
     const [typeList, setTypeList] = useState<BLOCK_TYPE_OPTION[]>([])
     const [childTypeList, setChildTypeList] = useState<BLOCK_TYPE_OPTION[]>([])
-
-    const [menuState, setMenuState] = useState<MENU_STATE>({
-        isOpen: false,
-        position: { top: 0, left: 0 },
-        filter: ''
-    });
-
-
     const [childMenuState, setChildMenuState] = useState<MENU_STATE>({
         isOpen: false,
         position: { top: 0, left: 0 },
@@ -28,13 +22,8 @@ export default function SelectCard(params: SELECT_CARD) {
 
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
+        handleKebab(e);
         setTypeList(params.sortTypeList)
-        setMenuState({
-            isOpen: true,
-            position: { top: rect.bottom + window.scrollY, left: rect.left },
-            filter: ''
-        });
     };
 
     const handleSubClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -61,35 +50,33 @@ export default function SelectCard(params: SELECT_CARD) {
                 </QueryCardWrapper>
             </button>
 
-            {menuState.isOpen && (
-                <BlockTypeMenu
-                    activeBlockId={'1'}
-                    position={menuState.position}
-                    filter={menuState.filter}
-                    onChangeBlockType={() => { console.log('abc') }}
-                    forSubClick={handleSubClick}
-                    onClose={() => setMenuState(prev => ({ ...prev, isOpen: false }))}
-                    typeList={typeList}
-                />
-            )}
+            <BlockTypeMenu
+                activeBlockId={'1'}
+                position={menuState.position}
+                filter={menuState.filter}
+                onChangeBlockType={() => { console.log('abc') }}
+                forSubClick={handleSubClick}
+                onClose={() => setMenuState(prev => ({ ...prev, isOpen: false }))}
+                typeList={typeList}
+                isOpen={menuState.isOpen}
+            />
 
 
-            {childMenuState.isOpen && (
-                <BlockTypeMenu
-                    activeBlockId={'1'}
-                    position={childMenuState.position}
-                    filter={menuState.filter}
-                    onChangeBlockType={(_id, newType) => {
-                        params.handleFilterChange('sort', newType)
-                        setChildMenuState(prev => ({ ...prev, isOpen: false }))
-                    }}
-                    onClose={() => {
-                        setChildMenuState(prev => ({ ...prev, isOpen: false }))
-                    }
-                    }
-                    typeList={childTypeList}
-                />
-            )}
+            <BlockTypeMenu
+                activeBlockId={'1'}
+                position={childMenuState.position}
+                filter={menuState.filter}
+                onChangeBlockType={(_id, newType) => {
+                    params.handleFilterChange('sort', newType)
+                    setChildMenuState(prev => ({ ...prev, isOpen: false }))
+                }}
+                onClose={() => {
+                    setChildMenuState(prev => ({ ...prev, isOpen: false }))
+                }
+                }
+                typeList={childTypeList}
+                isOpen={childMenuState.isOpen}
+            />
         </div>
     )
 }

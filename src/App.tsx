@@ -26,7 +26,7 @@ function App() {
             <Route path={routes.signin} element={<Login />} />
             <Route path={routes.register} element={<Register />} />
             <Route path={`${routes.categories}/:id`} element={<Contents />} />
-            <Route path={`${routes.space}/:id`} element={<Space />} />
+            <Route path={`${routes.space}/:categoryName/:id`} element={<Space />} />
           </Routes>
         </MainWrapper>
       </div>

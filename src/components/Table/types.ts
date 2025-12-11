@@ -15,6 +15,7 @@ export interface TABLE {
     loading: boolean
     fetch: () => void
     lastFetched: Date | string
+    filterList: FILTER_LIST[]
 };
 
 export interface TABLE_TEXT {

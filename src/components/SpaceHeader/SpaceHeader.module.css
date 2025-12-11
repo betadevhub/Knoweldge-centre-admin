@@ -73,3 +73,13 @@
 .container button:hover {
     text-decoration: underline;
 }
+
+.text{
+    transition: var(--allTransition);
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+.text:hover{
+    text-decoration: underline;
+}

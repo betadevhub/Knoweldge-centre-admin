@@ -108,7 +108,8 @@ export default function useBlocks() {
         addBulletBlock,
         deleteBlock,
         updateBlock,
-        changeBlockType
+        changeBlockType,
+        setBlocks
     };
 }
 

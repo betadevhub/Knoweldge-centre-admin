@@ -35,6 +35,7 @@ export interface BLOCK_TYPE_MENU {
     onClose: () => void;
     forSubClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     typeList: BLOCK_TYPE_OPTION[];
+    isOpen: boolean
 }
 
 
